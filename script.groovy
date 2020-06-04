@@ -1,4 +1,4 @@
-def buidStep() {
+def buildStep() {
   echo 'Building the project now!!'
 }
 
