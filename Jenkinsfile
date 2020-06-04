@@ -8,9 +8,21 @@ pipeline {
 
   
   stages { 
+    stage("init") { 
+      steps {
+        echo "In Init section"
+        script {
+          gv = load "script.groovy"
+        }
+        
+      }
+    }
+    
     stage("build") { 
       steps {
-        echo "In Build section"
+        script { 
+          gv.buildStep()
+        }
         
       }
     }
@@ -25,6 +37,9 @@ pipeline {
       steps {
         echo "In test section"
         echo "Version selected: ${params.VERSION}"
+        script { 
+          gv.testStep()
+        }
       }
     }
     
@@ -32,6 +47,9 @@ pipeline {
     stage("deploy") { 
       steps {
         echo "In deploy section"
+        script { 
+          gv.deployStep()
+        }
       }
     }
   }
